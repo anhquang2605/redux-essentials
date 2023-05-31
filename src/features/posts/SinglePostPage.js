@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 import { PostAuthor } from './PostAuthor'
 import { TimeAgo } from './TimeAgo'
 import { ReactionButton } from './ReactionButton'
+import { selectPostById } from './postsSlice'
 export const SinglePostPage = ({ match }) => {
   const { postId } = match.params
     //return the right post from the posts array in the Redux store
   const post = useSelector(state =>
-    state.posts.find(post => post.id === postId)
+    selectPostById(state, postId)
   )
 
   if (!post) {
