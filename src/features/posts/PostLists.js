@@ -36,6 +36,7 @@ export const PostsList = () => {
       </article>
     )
   }
+  PostExcerpt = React.memo(PostExcerpt) //don't rerender the PostExcerpt component if the post the props hasn't changed, will bypass the default behavior where the component will always rerender when the parent component rerenders
   let content
   //check status and render content accordingly
   if (postStatus === 'loading') {
