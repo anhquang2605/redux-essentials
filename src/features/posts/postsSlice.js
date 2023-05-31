@@ -1,4 +1,4 @@
-import {createSlice, nanoid, createAsyncThunk} from '@reduxjs/toolkit'
+import {createSlice, nanoid, createAsyncThunk, createSelector} from '@reduxjs/toolkit'
 import {client} from '../../api/client'
 import {sub} from 'date-fns'
 /* const initialState = [
@@ -69,6 +69,13 @@ export const selectAllPosts = state => state.posts.posts
 
 export const selectPostById = (state, postId) =>
   state.posts.posts.find(post => post.id === postId)
+//over here the arrays in the first argument are the input selectors, the function in the second argument is the output selector. 
+//The input selectors specify the data from the store that the output selector needs to calculate its return value. 
+//When there are changes to the store, the output selector will only recalculate its value if the input selectors return values have changed.
+export const selectPostsByUser = createSelector(
+    [selectAllPosts, (state, userId) => userId],//we only care about the userId, not the entire state so we use a function to get the userId from the provided arguments 
+    (posts,userId) => posts.filter(post => post.user === userId)
+)
 
 export const {postUpdated, reactionAdded} = postsSlice.actions
 export default postsSlice.reducer
