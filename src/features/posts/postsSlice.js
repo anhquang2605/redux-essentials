@@ -71,9 +71,10 @@ export const selectPostById = (state, postId) =>
   state.posts.posts.find(post => post.id === postId)
 //over here the arrays in the first argument are the input selectors, the function in the second argument is the output selector. 
 //The input selectors specify the data from the store that the output selector needs to calculate its return value. 
-//When there are changes to the store, the output selector will only recalculate its value if the input selectors return values have changed.
+//When there are changes to the store, the output selector will only recalculate its value if the input selectors return values have changed. 
+//This will support memoization to avoid unnecessary re-renders
 export const selectPostsByUser = createSelector(
-    [selectAllPosts, (state, userId) => userId],//we only care about the userId, not the entire state so we use a function to get the userId from the provided arguments 
+    [selectAllPosts, (state, userId) => userId],//we only care about the userId, not the entire state so we use a function to get the userId from the provided arguments. Why can we just provide the userId without returning in the function?
     (posts,userId) => posts.filter(post => post.user === userId)
 )
 
