@@ -90,6 +90,7 @@ export const {
   selectIds: selectPostIds
   // Pass in a selector that returns the posts slice of state
 } = postsAdapter.getSelectors(state => state.posts)//where are the posts from state.posts coming from? the name of the slice is posts, so the state.posts is the posts slice of the state
+//We want to provide the function with state.posts so that it can select the posts from the state.
 
 //over here the arrays in the first argument are the input selectors, the function in the second argument is the output selector. 
 //The input selectors specify the data from the store that the output selector needs to calculate its return value. 
